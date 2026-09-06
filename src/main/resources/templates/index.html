@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SC - Utilities</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Nhúng file CSS riêng -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body
+    class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white"
+  >
+    <!-- Header / Navbar -->
+    <header
+      class="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between"
+    >
+      <div class="flex items-center space-x-3 cursor-pointer">
+        <div
+          class="w-9 h-9 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20"
+        >
+          <svg
+            class="w-5 h-5 text-white"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            ></path>
+          </svg>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-white"
+          >PetexSpace</span
+        >
+      </div>
+
+      <nav
+        class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-400"
+      >
+        <a href="#" class="text-white transition-colors">Utilities</a>
+        <a href="#" class="hover:text-white transition-colors">About</a>
+        <a href="#" class="hover:text-white transition-colors">Blog</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <button
+          class="flex items-center space-x-2 bg-[#161b26] hover:bg-[#1f2636] border border-gray-800 text-gray-300 px-3.5 py-2 rounded-xl text-sm font-medium transition-all"
+        >
+          <svg
+            class="w-4 h-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+            ></path>
+          </svg>
+          <span>Theme</span>
+        </button>
+        <button
+          class="flex items-center space-x-2 bg-[#161b26] hover:bg-[#1f2636] border border-gray-800 text-gray-300 px-3.5 py-2 rounded-xl text-sm font-medium transition-all"
+        >
+          <svg
+            class="w-4 h-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+            ></path>
+          </svg>
+          <span>English</span>
+          <svg
+            class="w-3.5 h-3.5 text-gray-500"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Hero Section -->
+    <main class="w-full max-w-7xl mx-auto px-6 py-12 flex-grow">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+        <div class="lg:col-span-7">
+          <span
+            class="text-xs font-bold tracking-widest text-blue-500 uppercase mb-3 block"
+            >UTILITIES</span
+          >
+          <h1
+            class="text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight"
+          >
+            Start with what you need.
+          </h1>
+          <p class="text-gray-400 text-lg">
+            Choose a task and go straight to the utility.
+          </p>
+        </div>
+
+        <!-- Search Box Area -->
+        <div class="lg:col-span-5 flex flex-col justify-end">
+          <label class="text-sm font-semibold text-gray-300 mb-2 block"
+            >Find a utility</label
+          >
+          <div class="relative">
+            <span
+              class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none"
+            >
+              <svg
+                class="w-5 h-5 text-gray-500"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+              </svg>
+            </span>
+            <input
+              type="text"
+              placeholder="What do you want to do?"
+              class="w-full bg-[#121722] hover:bg-[#161c29] focus:bg-[#161c29] text-white placeholder-gray-500 text-sm rounded-2xl pl-12 pr-4 py-4 border border-gray-800 focus:border-blue-600 focus:outline-none transition-all shadow-inner"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Utilities List Cards -->
+      <div class="space-y-3">
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Create a QR code
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >QR Code Generator</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Read a QR code
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >QR Code Decoder</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Extract text from an image
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Image to Text OCR</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Test a mouse
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Mouse Test</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Test a connected device
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Device Diagnostics</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Check typing speed
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Typing Speed Test</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Generate names
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Random Name Generator</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Pick at random
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Random Wheel</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Convert a file
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >File Converter</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Work with data or text
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Data & Text</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Convert units and calculate everyday values
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Calculators</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Check color contrast
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Color Contrast Checker</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Count words and characters
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Text Counter</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Extract colors from an image
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Image Palette Extractor</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Get the current 2FA code
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >Get 2FA Code</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="#"
+          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+        >
+          <h2
+            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+          >
+            Write and compile LaTeX
+          </h2>
+          <div class="flex items-center space-x-6">
+            <span class="text-sm text-gray-400 hidden sm:inline"
+              >LaTeX Editor</span
+            >
+            <div
+              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="w-full max-w-7xl mx-auto px-6 py-8 text-center text-xs text-gray-600 border-t border-gray-900 mt-12"
+    >
+      &copy; 2026 PetexSpace Utilities. Built with Spring Boot & Tailwind CSS.
+    </footer>
+
+    <!-- Nhúng file JavaScript riêng -->
+    <script th:src="@{/js/main.js}"></script>
+  </body>
+</html>
