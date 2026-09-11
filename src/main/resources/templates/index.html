@@ -6,11 +6,16 @@
     <title>SC - Utilities</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
     <!-- Nhúng file CSS riêng -->
     <link rel="stylesheet" th:href="@{/css/style.css}" />
   </head>
   <body
-    class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white"
+    class="min-h-screen flex flex-col justify-between bg-slate-100 text-gray-900 dark:bg-[#0b0f19] dark:text-gray-100 transition-colors duration-300 selection:bg-blue-600 selection:text-white"
   >
     <!-- Header / Navbar -->
     <header
@@ -34,25 +39,43 @@
             ></path>
           </svg>
         </div>
-        <span class="text-xl font-bold tracking-tight text-white"
+        <span class="text-xl font-bold tracking-tight text-current"
           >PetexSpace</span
         >
       </div>
 
       <nav
-        class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-400"
+        class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600 dark:text-gray-400"
       >
-        <a href="#" class="text-white transition-colors">Utilities</a>
-        <a href="#" class="hover:text-white transition-colors">About</a>
-        <a href="#" class="hover:text-white transition-colors">Blog</a>
+        <a
+          th:href="@{/}"
+          class="text-current font-semibold transition-colors"
+          data-i18n="nav_utilities"
+          >Utilities</a
+        >
+        <a
+          th:href="@{/about}"
+          class="hover:text-blue-500 transition-colors"
+          data-i18n="nav_about"
+          >About</a
+        >
+        <a
+          th:href="@{/blog}"
+          class="hover:text-blue-500 transition-colors"
+          data-i18n="nav_blog"
+          >Blog</a
+        >
       </nav>
 
       <div class="flex items-center space-x-3">
+        <!-- Nút Đổi Theme (Light / Dark) -->
         <button
-          class="flex items-center space-x-2 bg-[#161b26] hover:bg-[#1f2636] border border-gray-800 text-gray-300 px-3.5 py-2 rounded-xl text-sm font-medium transition-all"
+          id="theme-btn"
+          class="flex items-center space-x-2 bg-gray-200 dark:bg-[#161b26] hover:bg-gray-300 dark:hover:bg-[#1f2636] border border-gray-300 dark:border-gray-800 text-gray-800 dark:text-gray-300 px-3.5 py-2 rounded-xl text-sm font-medium transition-all"
         >
           <svg
-            class="w-4 h-4 text-gray-400"
+            id="theme-icon"
+            class="w-4 h-4 text-amber-500 dark:text-amber-400"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
@@ -61,66 +84,97 @@
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
             ></path>
           </svg>
-          <span>Theme</span>
+          <span id="theme-text">Theme</span>
         </button>
-        <button
-          class="flex items-center space-x-2 bg-[#161b26] hover:bg-[#1f2636] border border-gray-800 text-gray-300 px-3.5 py-2 rounded-xl text-sm font-medium transition-all"
-        >
-          <svg
-            class="w-4 h-4 text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+
+        <!-- Nút Chọn Ngôn Ngữ (EN / VI) -->
+        <div class="relative inline-block text-left">
+          <button
+            id="lang-btn"
+            class="flex items-center space-x-2 bg-gray-200 dark:bg-[#161b26] hover:bg-gray-300 dark:hover:bg-[#1f2636] border border-gray-300 dark:border-gray-800 text-gray-800 dark:text-gray-300 px-3.5 py-2 rounded-xl text-sm font-medium transition-all"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-            ></path>
-          </svg>
-          <span>English</span>
-          <svg
-            class="w-3.5 h-3.5 text-gray-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+            <svg
+              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+              ></path>
+            </svg>
+            <span id="current-lang">English</span>
+            <svg
+              class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </button>
+
+          <!-- Dropdown Ngôn ngữ -->
+          <div
+            id="lang-dropdown"
+            class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-[#161b26] border border-gray-200 dark:border-gray-800 rounded-xl shadow-lg z-50 overflow-hidden"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M19 9l-7 7-7-7"
-            ></path>
-          </svg>
-        </button>
+            <button
+              data-lang="en"
+              class="lang-option w-full text-left px-4 py-2.5 text-sm hover:bg-gray-100 dark:hover:bg-[#1f2636] text-gray-800 dark:text-gray-300 transition-colors"
+            >
+              🇬🇧 English
+            </button>
+            <button
+              data-lang="vi"
+              class="lang-option w-full text-left px-4 py-2.5 text-sm hover:bg-gray-100 dark:hover:bg-[#1f2636] text-gray-800 dark:text-gray-300 transition-colors"
+            >
+              🇻🇳 Tiếng Việt
+            </button>
+          </div>
+        </div>
       </div>
     </header>
 
-    <!-- Main Hero Section -->
+    <!-- Main Hero Section & Utilities -->
     <main class="w-full max-w-7xl mx-auto px-6 py-12 flex-grow">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-12">
         <div class="lg:col-span-7">
           <span
             class="text-xs font-bold tracking-widest text-blue-500 uppercase mb-3 block"
+            data-i18n="hero_category"
             >UTILITIES</span
           >
           <h1
-            class="text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight"
+            class="text-4xl lg:text-5xl font-extrabold tracking-tight text-current mb-4 leading-tight"
+            data-i18n="hero_title"
           >
             Start with what you need.
           </h1>
-          <p class="text-gray-400 text-lg">
+          <p
+            class="text-gray-500 dark:text-gray-400 text-base lg:text-lg"
+            data-i18n="hero_subtitle"
+          >
             Choose a task and go straight to the utility.
           </p>
         </div>
 
         <!-- Search Box Area -->
         <div class="lg:col-span-5 flex flex-col justify-end">
-          <label class="text-sm font-semibold text-gray-300 mb-2 block"
+          <label
+            class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block"
+            data-i18n="search_label"
             >Find a utility</label
           >
           <div class="relative">
@@ -128,7 +182,7 @@
               class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none"
             >
               <svg
-                class="w-5 h-5 text-gray-500"
+                class="w-5 h-5 text-gray-400"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -143,34 +197,39 @@
             </span>
             <input
               type="text"
+              id="search-input"
               placeholder="What do you want to do?"
-              class="w-full bg-[#121722] hover:bg-[#161c29] focus:bg-[#161c29] text-white placeholder-gray-500 text-sm rounded-2xl pl-12 pr-4 py-4 border border-gray-800 focus:border-blue-600 focus:outline-none transition-all shadow-inner"
+              data-i18n-placeholder="search_placeholder"
+              class="w-full bg-white dark:bg-[#121722] text-current placeholder-gray-400 text-sm rounded-2xl pl-12 pr-4 py-3.5 border border-gray-300 dark:border-gray-800 focus:border-blue-600 focus:outline-none transition-all shadow-sm"
             />
           </div>
         </div>
       </div>
 
-      <!-- Utilities List Cards -->
-      <div class="space-y-3">
-        <!-- Đã sửa href thành th:href="@{/qr-generator}" -->
+      <!-- Utilities List Cards (16 Modules) -->
+      <div class="space-y-3" id="utilities-list">
+        <!-- 1. QR Code Generator -->
         <a
           th:href="@{/qr-generator}"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u1_title"
           >
             Create a QR code
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u1_desc"
               >QR Code Generator</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -186,25 +245,28 @@
           </div>
         </a>
 
-        <!-- Đã sửa href thành th:href="@{/qr-decoder}" -->
+        <!-- 2. QR Code Decoder -->
         <a
           th:href="@{/qr-decoder}"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u2_title"
           >
             Read a QR code
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u2_desc"
               >QR Code Decoder</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -220,24 +282,28 @@
           </div>
         </a>
 
+        <!-- 3. OCR -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u3_title"
           >
-            Extract text from an image
+            Extract text from image
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
-              >Image to Text OCR</span
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u3_desc"
+              >Image OCR to Text</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -253,24 +319,28 @@
           </div>
         </a>
 
+        <!-- 4. Mouse Test -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u4_title"
           >
-            Test a mouse
+            Mouse Test
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
-              >Mouse Test</span
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u4_desc"
+              >Test mouse buttons and scroll</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -286,24 +356,28 @@
           </div>
         </a>
 
+        <!-- 5. Device Test -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u5_title"
           >
-            Test a connected device
+            Test connected devices
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u5_desc"
               >Device Diagnostics</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -319,24 +393,28 @@
           </div>
         </a>
 
+        <!-- 6. Typing Test -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u6_title"
           >
-            Check typing speed
+            Test typing speed
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u6_desc"
               >Typing Speed Test</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -352,24 +430,28 @@
           </div>
         </a>
 
+        <!-- 7. Random Name Generator -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u7_title"
           >
             Generate names
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u7_desc"
               >Random Name Generator</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -385,24 +467,28 @@
           </div>
         </a>
 
+        <!-- 8. Random Wheel -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u8_title"
           >
-            Pick at random
+            Random selection
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
-              >Random Wheel</span
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u8_desc"
+              >Random Wheel Picker</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -418,24 +504,28 @@
           </div>
         </a>
 
+        <!-- 9. File Converter -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u9_title"
           >
             Convert a file
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u9_desc"
               >File Converter</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -451,24 +541,28 @@
           </div>
         </a>
 
+        <!-- 10. Data & Text -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u10_title"
           >
             Work with data or text
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
-              >Data & Text</span
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u10_desc"
+              >Data & Text Tools</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -484,24 +578,28 @@
           </div>
         </a>
 
+        <!-- 11. Calculator & Unit Converter -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u11_title"
           >
-            Convert units and calculate everyday values
+            Unit converter & Calculator
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
-              >Calculators</span
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u11_desc"
+              >Calculator</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -517,24 +615,28 @@
           </div>
         </a>
 
+        <!-- 12. Color Contrast Checker -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u12_title"
           >
-            Check color contrast
+            Color Contrast Checker
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
-              >Color Contrast Checker</span
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u12_desc"
+              >Check Color Contrast</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -550,24 +652,28 @@
           </div>
         </a>
 
+        <!-- 13. Text Counter -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u13_title"
           >
-            Count words and characters
+            Word & Character Counter
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u13_desc"
               >Text Counter</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -583,24 +689,28 @@
           </div>
         </a>
 
+        <!-- 14. Image Palette Extract -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u14_title"
           >
-            Extract colors from an image
+            Extract color palette from image
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
-              >Image Palette Extractor</span
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u14_desc"
+              >Image Color Palette</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -616,24 +726,28 @@
           </div>
         </a>
 
+        <!-- 15. 2FA Code Generator -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u15_title"
           >
-            Get the current 2FA code
+            Get current 2FA code
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u15_desc"
               >Get 2FA Code</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -649,24 +763,28 @@
           </div>
         </a>
 
+        <!-- 16. LaTeX Editor -->
         <a
           href="#"
-          class="group flex items-center justify-between bg-[#121722] hover:bg-[#182030] border border-gray-800/80 hover:border-blue-600/50 p-6 rounded-2xl transition-all duration-200"
+          class="utility-card group flex items-center justify-between bg-white dark:bg-[#121722] hover:bg-gray-50 dark:hover:bg-[#182030] border border-gray-200 dark:border-gray-800/80 hover:border-blue-600/50 p-5 rounded-2xl transition-all duration-200 shadow-sm"
         >
           <h2
-            class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors"
+            class="text-base font-bold text-current group-hover:text-blue-500 transition-colors"
+            data-i18n="u16_title"
           >
-            Write and compile LaTeX
+            Write & Compile LaTeX
           </h2>
           <div class="flex items-center space-x-6">
-            <span class="text-sm text-gray-400 hidden sm:inline"
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline"
+              data-i18n="u16_desc"
               >LaTeX Editor</span
             >
             <div
-              class="w-10 h-10 rounded-xl bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
+              class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1a2234] group-hover:bg-blue-600 flex items-center justify-center transition-all"
             >
               <svg
-                class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -686,7 +804,7 @@
 
     <!-- Footer -->
     <footer
-      class="w-full max-w-7xl mx-auto px-6 py-8 text-center text-xs text-gray-600 border-t border-gray-900 mt-12"
+      class="w-full max-w-7xl mx-auto px-6 py-8 text-center text-xs text-gray-500 border-t border-gray-200 dark:border-gray-800/60 mt-12"
     >
       &copy; 2026 SC Utilities. Built with Spring Boot & Tailwind CSS.
     </footer>
