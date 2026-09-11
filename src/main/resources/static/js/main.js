@@ -14,6 +14,29 @@ document.addEventListener("DOMContentLoaded", function () {
       search_label: "Find a utility",
       search_placeholder: "What do you want to do?",
 
+
+      // About Page
+      about_title: "About PetexSpace Utilities",
+      about_subtitle:
+        "A collection of fast, lightweight, and modern web utilities built to make your daily tasks effortless.",
+      about_mission_title: "🚀 Mission",
+      about_mission_desc:
+        "PetexSpace Utilities provides clean, privacy-focused, and high-performance online tools without clutter or annoying ads. Everything is designed to be developer and user friendly.",
+      about_tech_title: "🛠 Tech Stack",
+
+      // Blog Page
+      blog_title: "Blog & Articles",
+      blog_subtitle: "Latest news, technical guides, and utility updates.",
+      blog_post1_tag: "Guide",
+      blog_post1_title: "How to Generate QR Codes Safely in Java",
+      blog_post1_desc:
+        "Learn how to create QR codes internally using ZXing library without depending on 3rd party APIs.",
+      blog_post2_tag: "Productivity",
+      blog_post2_title: "Top 10 Web Utilities Every Developer Needs",
+      blog_post2_desc:
+        "Discover essential online tools to boost your daily coding and productivity workflow.",
+
+
       u1_title: "Create a QR code",
       u1_desc: "QR Code Generator",
       u2_title: "Read a QR code",
@@ -56,6 +79,30 @@ document.addEventListener("DOMContentLoaded", function () {
       hero_subtitle: "Chọn một công cụ và bắt đầu công việc ngay lập tức.",
       search_label: "Tìm kiếm tiện ích",
       search_placeholder: "Bạn muốn làm gì?",
+
+
+      // About Page
+      about_title: "Về PetexSpace Utilities",
+      about_subtitle:
+        "Bộ công cụ web nhanh chóng, nhẹ nhàng và hiện đại giúp công việc hàng ngày của bạn trở nên dễ dàng.",
+      about_mission_title: "🚀 Sứ mệnh",
+      about_mission_desc:
+        "PetexSpace Utilities cung cấp các công cụ trực tuyến sạch sẽ, bảo mật và hiệu suất cao mà không có quảng cáo phiền phức. Mọi thứ được thiết kế tối ưu cho lập trình viên và người dùng.",
+      about_tech_title: "🛠 Công nghệ sử dụng",
+
+      // Blog Page
+      blog_title: "Bài viết & Tin tức",
+      blog_subtitle:
+        "Cập nhật những tin tức, hướng dẫn kỹ thuật và tính năng mới nhất.",
+      blog_post1_tag: "Hướng dẫn",
+      blog_post1_title: "Cách tạo mã QR an toàn trong Java",
+      blog_post1_desc:
+        "Tìm hiểu cách tạo mã QR nội bộ bằng thư viện ZXing mà không phụ thuộc vào API bên thứ 3.",
+      blog_post2_tag: "Năng suất",
+      blog_post2_title: "Top 10 tiện ích Web lập trình viên nào cũng cần",
+      blog_post2_desc:
+        "Khám phá các công cụ trực tuyến thiết yếu giúp tăng tốc quy trình làm việc và lập trình hàng ngày của bạn.",
+
 
       u1_title: "Tạo mã QR",
       u1_desc: "Trình tạo mã QR",
