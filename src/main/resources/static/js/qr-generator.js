@@ -21,9 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
     generateBtn.disabled = true;
     generateBtn.classList.add("opacity-70", "cursor-not-allowed");
 
-    // Gọi API tạo QR code tạm thời (trả về file ảnh PNG)
-    // Lưu ý: Sau này làm phần Service trong Spring Boot, bạn sẽ thay đổi URL này
-    const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(textValue)}`;
+    // Gọi API nội bộ của Spring Boot backend
+    const apiUrl = `/api/qr/generate?data=${encodeURIComponent(textValue)}`;
 
     // Load ảnh và hiển thị kết quả
     qrImage.src = apiUrl;
