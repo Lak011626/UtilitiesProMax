@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
       search_label: "Find a utility",
       search_placeholder: "What do you want to do?",
 
+
       // About Page
       about_title: "About PetexSpace Utilities",
       about_subtitle:
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
       blog_post2_title: "Top 10 Web Utilities Every Developer Needs",
       blog_post2_desc:
         "Discover essential online tools to boost your daily coding and productivity workflow.",
+
 
       u1_title: "Create a QR code",
       u1_desc: "QR Code Generator",
@@ -78,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       search_label: "Tìm kiếm tiện ích",
       search_placeholder: "Bạn muốn làm gì?",
 
+
       // About Page
       about_title: "Về PetexSpace Utilities",
       about_subtitle:
@@ -99,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
       blog_post2_title: "Top 10 tiện ích Web lập trình viên nào cũng cần",
       blog_post2_desc:
         "Khám phá các công cụ trực tuyến thiết yếu giúp tăng tốc quy trình làm việc và lập trình hàng ngày của bạn.",
+
 
       u1_title: "Tạo mã QR",
       u1_desc: "Trình tạo mã QR",

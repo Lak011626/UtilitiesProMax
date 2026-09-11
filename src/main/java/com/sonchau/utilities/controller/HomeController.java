@@ -7,7 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    public String home() {
-        return "index"; // Sẽ tìm file index.html trong thư mục templates
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about"; // Trả về templates/about.html
+    }
+
+    @GetMapping("/blog")
+    public String blog() {
+        return "blog"; // Trả về templates/blog.html
     }
 }
