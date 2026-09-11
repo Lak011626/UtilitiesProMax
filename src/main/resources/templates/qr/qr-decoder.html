@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Decoder - PetexSpace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body
+    class="min-h-screen flex flex-col justify-between bg-slate-100 text-gray-900 dark:bg-[#0b0f19] dark:text-gray-100 transition-colors duration-300 selection:bg-blue-600 selection:text-white"
+  >
+    <!-- Header / Navbar -->
+    <header
+      class="w-full max-w-3xl mx-auto px-6 py-8 flex items-center justify-between"
+    >
+      <a
+        th:href="@{/}"
+        class="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          ></path>
+        </svg>
+        <span class="font-medium text-sm">Back to Utilities</span>
+      </a>
+      <div class="font-bold tracking-tight text-current text-lg">
+        PetexSpace
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full max-w-3xl mx-auto px-6 py-4 flex-grow">
+      <div class="mb-8">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-current mb-3">
+          Read a QR Code
+        </h1>
+        <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base">
+          Upload or drag & drop a QR code image to decode its content instantly.
+        </p>
+      </div>
+
+      <!-- Container Box -->
+      <div
+        class="bg-white dark:bg-[#121722] border border-gray-200 dark:border-gray-800/80 rounded-2xl p-6 md:p-8 shadow-sm"
+      >
+        <!-- Dropzone / File Upload -->
+        <div
+          id="dropzone"
+          class="border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-blue-500 rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors bg-gray-50 dark:bg-[#161c29]/50"
+        >
+          <input
+            type="file"
+            id="qr-file-input"
+            accept="image/*"
+            class="hidden"
+          />
+          <div id="upload-placeholder" class="flex flex-col items-center">
+            <div
+              class="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 flex items-center justify-center mb-3"
+            >
+              <svg
+                class="w-7 h-7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                ></path>
+              </svg>
+            </div>
+            <p
+              class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1"
+            >
+              Click to upload or drag and drop
+            </p>
+            <p class="text-xs text-gray-400">PNG, JPG, JPEG, WEBP</p>
+          </div>
+
+          <!-- Preview image -->
+          <div id="preview-container" class="hidden flex flex-col items-center">
+            <img
+              id="image-preview"
+              src=""
+              alt="Preview"
+              class="max-h-56 rounded-xl object-contain shadow mb-3"
+            />
+            <span id="file-name" class="text-xs text-gray-500"></span>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <button
+          id="decode-btn"
+          disabled
+          class="w-full mt-6 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/20 active:scale-[0.98]"
+        >
+          Decode QR Code
+        </button>
+
+        <!-- Error Alert -->
+        <div
+          id="error-alert"
+          class="hidden mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-sm"
+        ></div>
+
+        <!-- Result Box -->
+        <div
+          id="result-box"
+          class="hidden mt-8 pt-8 border-t border-gray-200 dark:border-gray-800"
+        >
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >Decoded Content</label
+          >
+          <div class="relative">
+            <textarea
+              id="decoded-result"
+              readonly
+              rows="4"
+              class="w-full bg-gray-50 dark:bg-[#161c29] text-current text-sm rounded-xl p-4 border border-gray-300 dark:border-gray-700 focus:outline-none resize-none font-mono"
+            ></textarea>
+            <button
+              id="copy-btn"
+              class="absolute top-3 right-3 px-3 py-1.5 bg-gray-200 dark:bg-gray-700 hover:bg-blue-600 hover:text-white text-xs font-medium rounded-lg transition-colors"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="w-full max-w-7xl mx-auto px-6 py-8 text-center text-xs text-gray-500 border-t border-gray-200 dark:border-gray-800/60 mt-12"
+    >
+      &copy; 2026 SC Utilities. Built with Spring Boot & Tailwind CSS.
+    </footer>
+
+    <script th:src="@{/js/qr-decoder.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
+</html>

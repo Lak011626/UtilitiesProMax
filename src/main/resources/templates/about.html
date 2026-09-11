@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - PetexSpace Utilities</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body
+    class="min-h-screen flex flex-col justify-between bg-slate-100 text-gray-900 dark:bg-[#0b0f19] dark:text-gray-100 transition-colors duration-300 selection:bg-blue-600 selection:text-white"
+  >
+    <!-- Header / Navbar -->
+    <header
+      class="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between"
+    >
+      <a href="/" class="flex items-center space-x-3 cursor-pointer">
+        <div
+          class="w-9 h-9 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20"
+        >
+          <svg
+            class="w-5 h-5 text-white"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            ></path>
+          </svg>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-current"
+          >PetexSpace</span
+        >
+      </a>
+
+      <nav
+        class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600 dark:text-gray-400"
+      >
+        <a
+          href="/"
+          class="hover:text-blue-500 transition-colors"
+          data-i18n="nav_utilities"
+          >Utilities</a
+        >
+        <a
+          href="/about"
+          class="text-current font-semibold transition-colors"
+          data-i18n="nav_about"
+          >About</a
+        >
+        <a
+          href="/blog"
+          class="hover:text-blue-500 transition-colors"
+          data-i18n="nav_blog"
+          >Blog</a
+        >
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <!-- Nút Đổi Theme -->
+        <button
+          id="theme-btn"
+          class="flex items-center space-x-2 bg-gray-200 dark:bg-[#161b26] hover:bg-gray-300 dark:hover:bg-[#1f2636] border border-gray-300 dark:border-gray-800 text-gray-800 dark:text-gray-300 px-3.5 py-2 rounded-xl text-sm font-medium transition-all"
+        >
+          <svg
+            id="theme-icon"
+            class="w-4 h-4 text-amber-500 dark:text-amber-400"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            ></path>
+          </svg>
+          <span id="theme-text">Theme</span>
+        </button>
+
+        <!-- Nút Chọn Ngôn Ngữ -->
+        <div class="relative inline-block text-left">
+          <button
+            id="lang-btn"
+            class="flex items-center space-x-2 bg-gray-200 dark:bg-[#161b26] hover:bg-gray-300 dark:hover:bg-[#1f2636] border border-gray-300 dark:border-gray-800 text-gray-800 dark:text-gray-300 px-3.5 py-2 rounded-xl text-sm font-medium transition-all"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+              ></path>
+            </svg>
+            <span id="current-lang">English</span>
+          </button>
+
+          <div
+            id="lang-dropdown"
+            class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-[#161b26] border border-gray-200 dark:border-gray-800 rounded-xl shadow-lg z-50 overflow-hidden"
+          >
+            <button
+              data-lang="en"
+              class="lang-option w-full text-left px-4 py-2.5 text-sm hover:bg-gray-100 dark:hover:bg-[#1f2636] text-gray-800 dark:text-gray-300 transition-colors"
+            >
+              🇬🇧 English
+            </button>
+            <button
+              data-lang="vi"
+              class="lang-option w-full text-left px-4 py-2.5 text-sm hover:bg-gray-100 dark:hover:bg-[#1f2636] text-gray-800 dark:text-gray-300 transition-colors"
+            >
+              🇻🇳 Tiếng Việt
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full max-w-4xl mx-auto px-6 py-12 flex-grow">
+      <div class="text-center mb-12">
+        <h1
+          class="text-4xl font-extrabold tracking-tight mb-4"
+          data-i18n="about_title"
+        >
+          About PetexSpace Utilities
+        </h1>
+        <p
+          class="text-gray-500 dark:text-gray-400 text-lg"
+          data-i18n="about_subtitle"
+        >
+          A collection of fast, lightweight, and modern web utilities built to
+          make your daily tasks effortless.
+        </p>
+      </div>
+
+      <div class="space-y-8">
+        <div
+          class="bg-white dark:bg-[#121722] border border-gray-200 dark:border-gray-800/80 p-8 rounded-2xl shadow-sm"
+        >
+          <h2
+            class="text-xl font-bold mb-3 text-blue-500"
+            data-i18n="about_mission_title"
+          >
+            🚀 Mission
+          </h2>
+          <p
+            class="text-gray-600 dark:text-gray-300 leading-relaxed"
+            data-i18n="about_mission_desc"
+          >
+            PetexSpace Utilities provides clean, privacy-focused, and
+            high-performance online tools without clutter or annoying ads.
+            Everything is designed to be developer and user friendly.
+          </p>
+        </div>
+
+        <div
+          class="bg-white dark:bg-[#121722] border border-gray-200 dark:border-gray-800/80 p-8 rounded-2xl shadow-sm"
+        >
+          <h2
+            class="text-xl font-bold mb-3 text-blue-500"
+            data-i18n="about_tech_title"
+          >
+            🛠 Tech Stack
+          </h2>
+          <ul
+            class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2"
+          >
+            <li>
+              <strong class="text-current">Backend:</strong> Java 17, Spring
+              Boot 3
+            </li>
+            <li>
+              <strong class="text-current">Frontend:</strong> Thymeleaf,
+              Tailwind CSS, JavaScript
+            </li>
+            <li>
+              <strong class="text-current">Libraries:</strong> ZXing for QR Code
+              processing
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="w-full max-w-7xl mx-auto px-6 py-8 text-center text-xs text-gray-500 border-t border-gray-200 dark:border-gray-800/60 mt-12"
+    >
+      &copy; 2026 SC Utilities. Built with Spring Boot & Tailwind CSS.
+    </footer>
+
+    <script th:src="@{/js/main.js}"></script>
+  </body>
+</html>
